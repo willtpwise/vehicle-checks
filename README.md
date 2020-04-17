@@ -1,11 +1,12 @@
 # vehicle-checks
 
 ## Device setup
-1. [Download this repo](https://github.com/willtpwise/vehicle-checks/archive/master.zip) (or clone it if you know how to do that!)
 1. Install [Node](https://nodejs.org/en/download/)
-1. Using your terminal, navigate to the folder where you've downloaded this repo
-    - For Mac, try `cd ~/Downloads/vehicle-checks-master`
-    - For Windows, see [this example](https://www.digitalcitizen.life/command-prompt-how-use-basic-commands)
+1. [Download this repo](https://github.com/willtpwise/vehicle-checks/archive/master.zip) (or clone it if you know how to do that!)
+1. The repo will be downloaded as a `.zip` file, unzip it and take not of where you've unzipped it to (downloads folder, desktop, etc)
+1. Using your terminal, navigate to the folder where you've stored the unzipped folder
+    - For Mac, open the "Terminal" app and drag the folder over to the application icon
+    - For Windows, good luck... I'm hopeless. Try [this example](https://www.digitalcitizen.life/command-prompt-how-use-basic-commands)
 1. Install the dependencies of the app by running `npm install`
 1. Run the local development server by running `npm run serve`
 1. The app will now be available at [http://localhost:8080/](http://localhost:8080/). Open it up in a browser to check that it's working
