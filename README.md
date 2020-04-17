@@ -12,10 +12,10 @@
 1. Now open the repo in a code editor of your choice, some popular options include VSCode, Atom and Sublime. All of which are free to use.
 1. Changes made to the files inside of `src/` will automatically trigger an update. Try it out, open up `src/pages/HomePage.vue`, change the page title from "Vehicle Checks" to whatever and hit save!
 
+You might want to install an extension to your code editor to give you syntax highlighting. Here's how to [install one for VSCode](https://marketplace.visualstudio.com/items?itemName=octref.vetur).
+
 ## Code Tour
 This app is written in [Vue.js](https://vuejs.org/v2/guide/).
-
-You might want to install an extension to your code editor to give you syntax highlighting. Here's how to [install one for VSCode](https://marketplace.visualstudio.com/items?itemName=octref.vetur).
 
 The app has two pages. All pages are stored in the `src/pages` directory.
 1. The home page, which lives at `src/pages/HomePage.vue` and can be accessed in the browser by visiting [http://localhost:8080/](http://localhost:8080/)
