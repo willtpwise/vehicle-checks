@@ -1,31 +1,28 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <style>
-#app {
+
+body {
+  /* These are the default text and background colours for the app */
+  color: #FAFAFF;
+  background: #1E2749;
+  /* This is the default font style for the app */
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
   text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
+  padding: 16px;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
