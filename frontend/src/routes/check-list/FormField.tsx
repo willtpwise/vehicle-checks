@@ -79,7 +79,9 @@ export function FormField({ content, submission, onChange }: Props) {
   return (
     <ListItem button onClick={e => handlePassOrFailToggle()}>
       <ListItemAvatar>
-        <HelpButton label={content.label} helpText={content.helpText!} />
+        <HelpButton
+          label={content.label}
+          helpText={content.helpText!} />
       </ListItemAvatar>
       <ListItemText primary={content.label} />
       <ListItemSecondaryAction>
