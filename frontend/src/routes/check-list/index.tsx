@@ -122,6 +122,10 @@ export function CheckList() {
       setSubmissionResult({ code: 'Success', message: 'Email sent' });
       setSubmission(initialSubmission());
       window.scrollTo(0, 0);
+
+      setTimeout(() => {
+        setSubmissionResult(null);
+      }, 4000)
     }, 1500)
 
   }
