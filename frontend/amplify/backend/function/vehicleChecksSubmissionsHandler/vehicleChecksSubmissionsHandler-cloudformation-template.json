@@ -69,7 +69,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-vehiclechecks-dev-195713-deployment",
-					"S3Key": "amplify-builds/vehicleChecksSubmissionsHandler-31414765424b2b372b6b-build.zip"
+					"S3Key": "amplify-builds/vehicleChecksSubmissionsHandler-734870476a5152424a33-build.zip"
 				}
 			}
 		},

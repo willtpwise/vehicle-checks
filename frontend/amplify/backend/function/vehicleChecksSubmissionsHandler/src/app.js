@@ -5,6 +5,9 @@ Amplify Params - DO NOT EDIT */
 const express = require('express')
 const bodyParser = require('body-parser')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
+const api_key = process.env.MAILGUN_PRIVATE_API_KEY;
+const domain = 'tech.williamwise.net';
+const mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 const app = express()
 app.use(bodyParser.json())
@@ -16,12 +19,32 @@ app.use(function(req, res, next) {
   next()
 });
 
-app.post('/submissions', (req, res) => {
+app.post('/submissions', async (req, res) => {
 
-  console.log('apiKey', process.env.MAILGUN_PRIVATE_API_KEY)
+  const {submission} = req.body
 
-  // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+  const data = {
+    from: 'Vehicle Checks <vehicle.checks@williamwise.net>',
+    to: 'will@williamwise.net',
+    subject: `${submission.callSign} - Vehicle Check`,
+    text: 'Testing some Mailgun awesomeness!'
+  };
+
+  mailgun.messages().send(data, (error, body) => {
+
+    if (error) {
+      res.status(500).json({
+        code: error.code,
+        message: error.message,
+      })
+    } else {
+      res.status(200).json({
+        code: 'Success',
+        message: 'Submission sent',
+      })
+    }
+  });
+
 });
 
 app.listen(3000, function() {
