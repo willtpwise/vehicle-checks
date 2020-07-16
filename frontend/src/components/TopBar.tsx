@@ -1,13 +1,10 @@
-import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import { Auth } from 'aws-amplify';
-import { AmplifySignOut } from '@aws-amplify/ui-react';
+import React from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function Header() {
+export default function TopBar() {
   const classes = useStyles();
 
   const handleSignOut: React.MouseEventHandler = (e) => {

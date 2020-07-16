@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import { CheckList } from './routes/check-list';
-import Header from './components/Header';
+import TopBar from './components/TopBar';
 import Amplify, { API, Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import awsconfig from './aws-exports';
@@ -16,7 +16,7 @@ Amplify.configure(awsconfig);
 function App() {
   return (
     <Router>
-      <Header />
+      <TopBar />
       <div>
         <Switch>
           <Route path="*">
