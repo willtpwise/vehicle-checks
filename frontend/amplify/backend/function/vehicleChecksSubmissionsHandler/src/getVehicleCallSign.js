@@ -1,6 +1,6 @@
-export const getVehicleCallSign = (submission) => {
+const getVehicleCallSign = (submission) => {
 
-  const callSignField = submission.sections[0].find(field => {
+  const callSignField = submission.sections[0].fields.find(field => {
     field.label === 'Call Sign'
   })
 
@@ -13,3 +13,5 @@ export const getVehicleCallSign = (submission) => {
   return null
 
 }
+
+module.exports = { getVehicleCallSign }

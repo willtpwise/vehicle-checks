@@ -25,7 +25,7 @@ app.post('/submissions', async (req, res) => {
 
   const { submission } = req.body
 
-  console.log('Received submission', submission)
+  console.log('Received submission', JSON.stringify(submission, null, '\t'))
 
   if (!submission) {
     res.status(400).json({
@@ -44,7 +44,7 @@ app.post('/submissions', async (req, res) => {
     'h:Reply-To': submission.createdBy,
     from: 'Vehicle Checks <vehicle.checks@tech.williamwise.net>',
     subject: `${callSign} - Vehicle Check`,
-    text: formatSubmissionToEmailBody(submission),
+    text: formatSubmissionToEmailBody(submission, callSign),
   };
 
   mailgun.messages().send(data, (error, body) => {

@@ -1,6 +1,6 @@
 const formatSubmissionToEmailBody = (submission, callSign) => {
 
-  const friendlyCreatedAt = new Date(submission.createdAt).toLocaleString()
+  const friendlyCreatedAt = new Date(submission.createdAt).toDateString()
 
   return `
 Please find attached a vehicle check for: ${callSign}.
