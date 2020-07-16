@@ -17,6 +17,9 @@
                     "appId": "d3bug8qvy3rk6d",
                     "type": "cicd"
                 }
+            },
+            "auth": {
+                "vehiclechecks6dfa9b4e": {}
             }
         }
     }

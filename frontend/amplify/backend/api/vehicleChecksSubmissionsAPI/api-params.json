@@ -1,0 +1,41 @@
+{
+    "paths": [
+        {
+            "name": "/submissions",
+            "lambdaFunction": "vehicleChecksSubmissionsHandler",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            }
+        }
+    ],
+    "resourceName": "vehicleChecksSubmissionsAPI",
+    "apiName": "vehicleChecksSubmissionsAPI",
+    "functionArns": [
+        {
+            "lambdaFunction": "vehicleChecksSubmissionsHandler"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-vehiclechecks-dev-195713-authRole",
+        "unAuthRoleName": "amplify-vehiclechecks-dev-195713-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "vehicleChecksSubmissionsHandler",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
