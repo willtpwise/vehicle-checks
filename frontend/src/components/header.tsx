@@ -6,6 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Auth } from 'aws-amplify';
+import { AmplifySignOut } from '@aws-amplify/ui-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,6 +26,12 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Header() {
   const classes = useStyles();
 
+  const handleSignOut: React.MouseEventHandler = (e) => {
+
+    Auth.signOut();
+    window.location.reload();
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -31,6 +39,9 @@ export default function Header() {
           <Typography variant="h6" className={classes.title}>
             Heavy Vehicle Checklist
           </Typography>
+          <Button color="inherit" onClick={handleSignOut}>
+            Sign out
+          </Button>
         </Toolbar>
       </AppBar>
     </div>

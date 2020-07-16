@@ -6,7 +6,12 @@ import {
   Route,
 } from "react-router-dom";
 import { CheckList } from './routes/check-list';
-import Header from './components/header';
+import Header from './components/Header';
+import Amplify, { API, Auth } from 'aws-amplify';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import awsconfig from './aws-exports';
+
+Amplify.configure(awsconfig);
 
 function App() {
   return (
@@ -23,4 +28,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);

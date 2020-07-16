@@ -7,6 +7,7 @@ import * as formContentData from './form-content';
 import { FormSection } from './FormSection';
 import { SubmissionResult } from './SubmissionResult';
 import { FormContent, FormSectionSubmission, Submission, VehicleType } from './types';
+import { createSubmission } from '../../services/createSubmission';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -128,7 +129,10 @@ export function CheckList() {
     setLoading(true);
     setConfirmDialogOpen(false);
 
-    setTimeout(() => {
+    try {
+
+      await createSubmission(submission)
+
       setLoading(false);
       setRegularRecipients(submission.recipients);
       setSubmissionResult({ code: 'Success', message: 'Email sent' });
@@ -138,7 +142,12 @@ export function CheckList() {
       setTimeout(() => {
         setSubmissionResult(null);
       }, 4000)
-    }, 1500)
+
+    } catch (err) {
+
+      setLoading(false);
+      setSubmissionResult(err);
+    }
 
   }
 
