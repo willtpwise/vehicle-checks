@@ -6,10 +6,11 @@
 		}
 	},
 	"auth": {
-		"vehiclechecks6dfa9b4e": {
+		"vehiclechecks15434744": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
-			"dependsOn": []
+			"dependsOn": [],
+			"customAuth": false
 		}
 	},
 	"function": {
