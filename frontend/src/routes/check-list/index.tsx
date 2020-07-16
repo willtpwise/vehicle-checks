@@ -1,15 +1,15 @@
-import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, debounce } from '@material-ui/core';
+import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Auth } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import Loading from '../../components/Loading';
+import { createSubmission } from '../../services/createSubmission';
 import { ConfirmDialog } from './ConfirmDialog';
 import * as formContentData from './form-content';
 import { FormSection } from './FormSection';
 import { SubmissionResult } from './SubmissionResult';
 import { FormContent, FormSectionSubmission, Submission, VehicleType } from './types';
-import { createSubmission } from '../../services/createSubmission';
-import { useForm, Controller } from 'react-hook-form';
-import { Auth } from 'aws-amplify';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -179,11 +179,11 @@ export function CheckList() {
         noValidate>
 
         <div className={classes.generalFields}>
-          <FormControl className={classes.formControl}>
+          <FormControl>
             <InputLabel>Vehicle Type</InputLabel>
             <Select
               value={submission.vehicleType}
-              onChange={e => setSubmission({ ...submission, vehicleType: e.target.value })}>
+              onChange={e => setSubmission({ ...submission, vehicleType: e.target.value as VehicleType })}>
 
               {vehicleTypeOptions.map(({ label, value }) => (
                 <MenuItem value={value} key={value}>{label}</MenuItem>
