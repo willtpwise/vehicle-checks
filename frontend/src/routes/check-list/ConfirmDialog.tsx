@@ -2,6 +2,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import { Delete, Close, Inbox, Email } from '@material-ui/icons';
 import React, { FormEvent, ChangeEvent, useState } from 'react';
 import { Submission } from './types';
+import { useForm } from 'react-hook-form';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,13 +35,7 @@ interface Props {
 export function ConfirmDialog({ open, submission, onChange, onConfirm, onCancel }: Props) {
 
   const classes = useStyles();
-
-  const handleConfirm = (e: FormEvent | MouseEvent) => {
-
-    e.preventDefault();
-    onConfirm();
-
-  }
+  const { register, errors, handleSubmit: validateBeforeSubmit } = useForm();
 
   const handleRecipientChange = (newValue: string, index: number) => {
 
@@ -85,44 +80,61 @@ export function ConfirmDialog({ open, submission, onChange, onConfirm, onCancel 
           <Typography variant="h6" className={classes.title}>
             Send to:
           </Typography>
-          <Button onClick={handleConfirm} color="inherit">
-            Submit
+          <Button form="recipientsForm" type="submit" onClick={validateBeforeSubmit(onConfirm)} color="inherit">
+            Send
           </Button>
         </Toolbar>
       </AppBar>
       <DialogContent className={classes.content}>
-        <DialogContentText>
-          Enter up to three emails below to send this to:
-        </DialogContentText>
-        <List className={classes.list}>
-          {
-            submission.recipients.map((recipient, i) => (
-              <ListItem key={i}>
-                <ListItemIcon>
-                  <Email />
-                </ListItemIcon>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  label={ i === 0 ? 'To' : 'Cc'}
-                  type="email"
-                  value={recipient}
-                  onChange={e => handleRecipientChange(e.target.value, i)}
-                  fullWidth
-                />
 
-                <ListItemSecondaryAction>
-                  <IconButton disabled={submission.recipients.length === 1} edge="end" onClick={e => removeRecipient(i)}>
-                    <Delete />
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            ))
-          }
-        </List>
-        <Button disabled={submission.recipients.length >= 3} onClick={e => addRecipient()}>
-          + Add
-        </Button>
+        <DialogContentText>
+          Enter up to three email addresses below:
+        </DialogContentText>
+        <form
+          id="recipientsForm"
+          onSubmit={validateBeforeSubmit(onConfirm)}
+          noValidate>
+          <List className={classes.list}>
+            {
+              submission.recipients.map((recipient, i) => (
+                <ListItem key={i}>
+                  <ListItemIcon>
+                    <Email />
+                  </ListItemIcon>
+                  <TextField
+                    name={`recipients[${i}]`}
+                    autoFocus
+                    margin="dense"
+                    label={ i === 0 ? 'To' : 'Cc'}
+                    type="email"
+                    error={!!errors[`recipients[${i}]`]}
+                    helperText={errors[`recipients[${i}]`]?.message}
+                    inputRef={register({
+                      required: i === 0 ? 'This field is required' : false,
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: 'Invalid email address'
+                      }
+                    })}
+                    value={recipient}
+                    required={i === 0}
+                    onChange={e => handleRecipientChange(e.target.value, i)}
+                    fullWidth
+                  />
+
+                  <ListItemSecondaryAction>
+                    <IconButton disabled={submission.recipients.length === 1} edge="end" onClick={e => removeRecipient(i)}>
+                      <Delete />
+                    </IconButton>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              ))
+            }
+          </List>
+          <Button disabled={submission.recipients.length >= 3} onClick={e => addRecipient()}>
+            + Add
+          </Button>
+        </form>
       </DialogContent>
     </Dialog>
   );

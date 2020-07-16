@@ -20,12 +20,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
+  register: any
+  errors: any
   content: FormContentSection
   submission: FormSectionSubmission
   onChange: (submission: FormSectionSubmission) => any
 }
 
-export function FormSection({content, submission, onChange}: Props) {
+export function FormSection({content, register, errors, submission, onChange}: Props) {
 
   const classes = useStyles();
 
@@ -50,6 +52,8 @@ export function FormSection({content, submission, onChange}: Props) {
         {content.fields.map((field, i) => (
           <FormField
             key={i}
+            register={register}
+            errors={errors}
             content={field}
             submission={submission?.fields[i]}
             onChange={e => handleFieldChange(e, i)} />

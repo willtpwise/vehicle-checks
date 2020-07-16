@@ -1,4 +1,4 @@
-import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, debounce } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
 import Loading from '../../components/Loading';
@@ -8,6 +8,8 @@ import { FormSection } from './FormSection';
 import { SubmissionResult } from './SubmissionResult';
 import { FormContent, FormSectionSubmission, Submission, VehicleType } from './types';
 import { createSubmission } from '../../services/createSubmission';
+import { useForm, Controller } from 'react-hook-form';
+import { Auth } from 'aws-amplify';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,6 +27,9 @@ const useStyles = makeStyles((theme: Theme) =>
     submitRow: {
       padding: theme.spacing(2),
       textAlign: 'right',
+    },
+    helpText: {
+      marginTop: 0 - theme.spacing(2),
     },
   }),
 );
@@ -50,20 +55,18 @@ const getRegularRecipients = (): string[] => {
 export function CheckList() {
 
   const classes = useStyles();
+  const { register, errors, handleSubmit: validateBeforeSubmit } = useForm();
 
   const initialSubmission = (): Submission => ({
     formCode: '',
     vehicleType: '' as VehicleType,
     recipients: getRegularRecipients(),
-    callSign: '',
-    bfoNumber: '',
-    odometer: 0,
-    engineHours: 0,
-    pumpHours: 0,
     sections: [],
     createdAt: new Date(),
+    createdBy: (Auth as any).user.attributes.email,
   })
   const [submission, setSubmission] = useState(initialSubmission())
+
 
   const [formContent, setFormContent] = useState<FormContent | null>(null)
   useEffect(() => {
@@ -116,9 +119,8 @@ export function CheckList() {
 
   const [loading, setLoading] = useState(false)
   const [submissionResult, setSubmissionResult] = useState<{ code: string, message: string } | null>(null)
-  const handleSubmit: React.FormEventHandler = async (e) => {
+  const handleSubmit = async () => {
 
-    e.preventDefault();
     setConfirmDialogOpen(true);
 
   }
@@ -147,7 +149,24 @@ export function CheckList() {
 
       setLoading(false);
       setSubmissionResult(err);
+      setTimeout(() => {
+        setSubmissionResult(null);
+      }, 4000)
+
     }
+
+  }
+
+  const handleSubmitErrors = () => {
+
+    const firstInvalidField = document.querySelector('.Mui-error');
+    if (!firstInvalidField) {
+      return
+    }
+
+    const { top } = firstInvalidField.getBoundingClientRect();
+
+    window.scrollTo(0, (top + window.scrollY) - 60);
 
   }
 
@@ -156,23 +175,24 @@ export function CheckList() {
 
       <form
         className={classes.root}
-        noValidate
-        autoComplete="off"
-        onSubmit={handleSubmit}>
+        onSubmit={validateBeforeSubmit(handleSubmit)}
+        noValidate>
 
         <div className={classes.generalFields}>
-          <FormControl>
+          <FormControl className={classes.formControl}>
             <InputLabel>Vehicle Type</InputLabel>
             <Select
               value={submission.vehicleType}
-              onChange={e => setSubmission({ ...submission, vehicleType: e.target.value as VehicleType })}
-            >
+              onChange={e => setSubmission({ ...submission, vehicleType: e.target.value })}>
+
               {vehicleTypeOptions.map(({ label, value }) => (
                 <MenuItem value={value} key={value}>{label}</MenuItem>
               ))}
+
             </Select>
             <FormHelperText>Select the type of vehicle you're checking.</FormHelperText>
           </FormControl>
+
         </div>
 
         {
@@ -186,6 +206,8 @@ export function CheckList() {
               return (
                 <FormSection
                   key={i}
+                  register={register}
+                  errors={errors}
                   content={section}
                   submission={submission.sections[i]}
                   onChange={e => handleFormSectionChange(e, i)} />

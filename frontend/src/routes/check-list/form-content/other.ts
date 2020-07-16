@@ -6,8 +6,9 @@ export const other = (): FormContent => ({
     {
       label: 'General Info',
       fields: [
-        { label: 'BFO Number', type: 'text', helpText: 'Some help text...' },
-        { label: 'Odometer', type: 'text', helpText: 'Some help text...' },
+        { label: 'Call Sign', type: 'text', helpText: 'Some help text...', required: true },
+        { label: 'Roof Number', type: 'text', helpText: 'Some help text...', required: true },
+        { label: 'Odometer', type: 'text', helpText: 'Some help text...', required: true },
       ]
     },
     {

@@ -37,12 +37,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
+  register: any
+  errors: any
   content: FormContentField
   submission: FormFieldSubmission
   onChange: (newValue: any) => any
 }
 
-export function FormField({ content, submission, onChange }: Props) {
+export function FormField({ content, register, errors, submission, onChange }: Props) {
 
   const classes = useStyles();
 
@@ -58,10 +60,6 @@ export function FormField({ content, submission, onChange }: Props) {
 
   }
 
-  const openInfoDialog: React.MouseEventHandler = (e) => {
-    e.stopPropagation()
-  }
-
   if (content.type === 'text') {
     return (
       <ListItem className={classes.textFieldListItem}>
@@ -69,9 +67,15 @@ export function FormField({ content, submission, onChange }: Props) {
           <HelpButton label={content.label} helpText={content.helpText!} />
         </ListItemAvatar>
         <TextField
+          name={content.label}
           className={classes.textFieldInput}
           label={content.label}
-          value={submission.value} />
+          value={submission.value}
+          required={content.required}
+          error={!!errors[content.label]}
+          helperText={errors[content.label]?.message}
+          onChange={e => onChange({ ...submission, value: e.target.value })}
+          inputRef={register({ required: content.required })} />
       </ListItem>
     )
   }

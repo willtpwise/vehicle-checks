@@ -10,19 +10,16 @@ export interface FormContentField {
   label: string
   type?: FieldType
   helpText?: string
+  required?: boolean
 }
 
 export interface Submission {
   formCode: string
   vehicleType: VehicleType
   recipients: string[]
-  callSign: string
-  bfoNumber: string
-  odometer: number
-  engineHours: number
-  pumpHours: number
   sections: FormSectionSubmission[]
   createdAt: Date
+  createdBy: string
 }
 export interface FormSectionSubmission {
   label: string
