@@ -15,7 +15,7 @@ export interface FormContentField {
 export interface Submission {
   formCode: string
   vehicleType: VehicleType
-  recipientEmail: string
+  recipients: string[]
   callSign: string
   bfoNumber: string
   odometer: number

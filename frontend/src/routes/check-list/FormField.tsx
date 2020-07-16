@@ -1,9 +1,9 @@
-import { createStyles, IconButton, makeStyles, Theme, Typography, List, ListItem, ListItemAvatar, Avatar, ListItemText, ListItemSecondaryAction, TextField } from '@material-ui/core';
+import { createStyles, IconButton, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, makeStyles, TextField, Theme } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
-import { CheckCircleOutline, Help, HighlightOff, RemoveCircleOutline, CheckCircle, ThumbUp, ThumbDown } from '@material-ui/icons';
+import { ThumbDown, ThumbUp } from '@material-ui/icons';
 import React from 'react';
-import { FormContentField, FormFieldSubmission } from './types';
 import { HelpButton } from './HelpButton';
+import { FormContentField, FormFieldSubmission } from './types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

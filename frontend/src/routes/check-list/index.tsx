@@ -1,13 +1,12 @@
-import { FormControl, InputLabel, MenuItem, Select, FormHelperText, Button, Snackbar } from '@material-ui/core';
+import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
-import * as fromContentData from './form-content';
-import { FormSection } from './FormSection';
-import { FormContent, FormSectionSubmission, Submission, VehicleType } from './types';
-import { Alert, AlertTitle } from '@material-ui/lab';
 import Loading from '../../components/Loading';
 import { ConfirmDialog } from './ConfirmDialog';
+import * as formContentData from './form-content';
+import { FormSection } from './FormSection';
 import { SubmissionResult } from './SubmissionResult';
+import { FormContent, FormSectionSubmission, Submission, VehicleType } from './types';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,14 +28,32 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+const RECIPIENT_STORAGE_KEY = 'vehicleChecksRecipients.v1'
+const setRegularRecipients = (recipients: string[]) => {
+  try {
+    localStorage.setItem(RECIPIENT_STORAGE_KEY, JSON.stringify(recipients))
+  } catch (err) {
+    console.error(err)
+  }
+}
+const getRegularRecipients = (): string[] => {
+  try {
+    const result = localStorage.getItem(RECIPIENT_STORAGE_KEY)
+    return result ? JSON.parse(result) : []
+  } catch (err) {
+    console.error(err)
+    return []
+  }
+}
+
 export function CheckList() {
 
   const classes = useStyles();
 
   const initialSubmission = (): Submission => ({
     formCode: '',
-    vehicleType: 'pc' as VehicleType,
-    recipientEmail: '',
+    vehicleType: '' as VehicleType,
+    recipients: getRegularRecipients(),
     callSign: '',
     bfoNumber: '',
     odometer: 0,
@@ -50,10 +67,10 @@ export function CheckList() {
   const [formContent, setFormContent] = useState<FormContent | null>(null)
   useEffect(() => {
 
-    if (typeof (fromContentData as any)[submission.vehicleType] === 'function') {
-      setFormContent((fromContentData as any)[submission.vehicleType]())
+    if (typeof (formContentData as any)[submission.vehicleType] === 'function') {
+      setFormContent((formContentData as any)[submission.vehicleType]())
     } else {
-      setFormContent(fromContentData.other())
+      setFormContent(formContentData.other())
     }
 
   }, [submission.vehicleType])
@@ -79,7 +96,6 @@ export function CheckList() {
         }
       })
     })
-    console.log(submission)
   }, [formContent?.sections])
 
   const handleFormSectionChange = (payload: FormSectionSubmission, index: number) => {
@@ -107,18 +123,14 @@ export function CheckList() {
   }
 
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false)
-  const handleConfirm = async (recipientEmail: string) => {
+  const handleConfirm = async () => {
 
     setLoading(true);
     setConfirmDialogOpen(false);
 
-    setSubmission({
-      ...submission,
-      recipientEmail,
-    })
-
     setTimeout(() => {
       setLoading(false);
+      setRegularRecipients(submission.recipients);
       setSubmissionResult({ code: 'Success', message: 'Email sent' });
       setSubmission(initialSubmission());
       window.scrollTo(0, 0);
@@ -193,8 +205,10 @@ export function CheckList() {
 
         <ConfirmDialog
           open={confirmDialogOpen}
+          submission={submission}
           onCancel={() => setConfirmDialogOpen(false)}
-          onConfirm={(e) => handleConfirm(e)} />
+          onChange={e => setSubmission(e)}
+          onConfirm={() => handleConfirm()} />
 
         {loading ? (<Loading />) : null}
 
