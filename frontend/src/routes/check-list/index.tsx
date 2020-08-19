@@ -157,19 +157,6 @@ export function CheckList() {
 
   }
 
-  const handleSubmitErrors = () => {
-
-    const firstInvalidField = document.querySelector('.Mui-error');
-    if (!firstInvalidField) {
-      return
-    }
-
-    const { top } = firstInvalidField.getBoundingClientRect();
-
-    window.scrollTo(0, (top + window.scrollY) - 60);
-
-  }
-
   return (
     <div>
 
