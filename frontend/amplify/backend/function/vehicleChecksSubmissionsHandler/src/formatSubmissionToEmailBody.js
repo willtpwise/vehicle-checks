@@ -12,11 +12,10 @@ ${section.label}\n
 ${section.fields.map(field => {
   return `\t${field.label}: ${field.value}\n`
 }).join('')}
-\n\n`
+\n`
   }).join('')
 }
 \n
-Created at: ${friendlyCreatedAt}\n
-Created by: ${submission.createdBy}`
+Created on: ${friendlyCreatedAt} by: ${submission.createdBy}`
 }
 module.exports = { formatSubmissionToEmailBody }

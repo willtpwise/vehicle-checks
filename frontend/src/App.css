@@ -1,3 +1,7 @@
 * {
   box-sizing: border-box;
 }
+
+body /deep/ .sign-up-form-footer {
+  font-weight: bold;
+}
