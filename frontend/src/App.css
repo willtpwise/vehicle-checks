@@ -2,6 +2,14 @@
   box-sizing: border-box;
 }
 
-body /deep/ .sign-up-form-footer {
-  font-weight: bold;
+:root {
+  --amplify-primary-color: #3f51b5;
+  --amplify-primary-tint: #2e3f9b;
+  --amplify-text-xs: 16px;
+  --amplify-text-xxs: 16px;
+  --amplify-text-sm: 16px;
+}
+
+body {
+  background: #f2f2f2;
 }

@@ -21,9 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: '5vw 0',
       textAlign: 'center',
     },
-    authenticatorPageTitle: {
-      fontSize: '40px',
-    },
   }),
 );
 
@@ -49,15 +46,14 @@ function Authenticator () {
   return (
     <div className={classes.authenticatorBody}>
       <h1>Vehicle Checks</h1>
-      <p>NSW RFS Vehicle Checks</p>
+      <p>Free Online Heavy Vehicle Checklist</p>
 
       <AmplifyAuthenticator
-        initialAuthState={'signup' as any}
         usernameAlias="email">
         <AmplifySignUp
           slot="sign-up"
           usernameAlias="email"
-          headerText="Create a free account"
+          headerText="Create your free account today"
           haveAccountText="Already a user?"
           formFields={[
             {

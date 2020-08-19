@@ -8,6 +8,7 @@ const awsmobile = {
     "aws_user_pools_id": "us-west-2_MrItormCZ",
     "aws_user_pools_web_client_id": "6kb1djdko5ckjijtjc76g1vl28",
     "oauth": {},
+    "federationTarget": "COGNITO_IDENTITY_POOLS",
     "aws_cloud_logic_custom": [
         {
             "name": "vehicleChecksSubmissionsAPI",
