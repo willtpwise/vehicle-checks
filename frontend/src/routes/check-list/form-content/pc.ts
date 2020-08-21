@@ -1,12 +1,12 @@
 import { FormContent } from '../types';
 import { generalInfo } from './common/generalInfo';
 
-export const other = (): FormContent => ({
-  code: 'other',
+export const pc = (): FormContent => ({
+  code: 'pc',
   sections: [
     generalInfo,
     {
-      label: '',
+      label: 'Mechanical Checks',
       fields:
         [{
           label: 'Tyres',

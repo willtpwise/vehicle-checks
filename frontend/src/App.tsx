@@ -12,6 +12,7 @@ import TopBar from './components/TopBar';
 import { CheckList } from './routes/check-list';
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import { makeStyles, createStyles, Theme } from '@material-ui/core';
+import logo from './logo.png'
 
 Amplify.configure(awsconfig);
 
@@ -20,6 +21,18 @@ const useStyles = makeStyles((theme: Theme) =>
     authenticatorBody: {
       margin: '5vw 0',
       textAlign: 'center',
+    },
+    logo: {
+      width: '100px',
+      height: '100px',
+      display: 'block',
+      margin: '0 auto',
+    },
+    subTitle: {
+      lineHeight: 1.3,
+      fontSize: '18px',
+      marginBottom: '24px',
+      color: '#222',
     },
   }),
 );
@@ -45,8 +58,9 @@ function Authenticator () {
 
   return (
     <div className={classes.authenticatorBody}>
+      <img className={classes.logo} src={logo} alt="Fire truck" />
       <h1>Vehicle Checks</h1>
-      <p>Free Online Heavy Vehicle Checklist</p>
+      <p className={classes.subTitle}>Free Online Heavy Vehicle Checklist <br></br>for the NSW Rural Fire Service</p>
 
       <AmplifyAuthenticator
         usernameAlias="email">
@@ -72,7 +86,7 @@ function Authenticator () {
           headerText="Check your email for a verification code"
           slot="confirm-sign-in">
         </AmplifyConfirmSignIn>
-      </AmplifyAuthenticator>   
+      </AmplifyAuthenticator>
     </div>
   )
 
