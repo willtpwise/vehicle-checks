@@ -2,6 +2,7 @@ import React from 'react';
 import { FormContentSection, FormFieldSubmission, FormSectionSubmission } from './types';
 import { Typography, Theme, makeStyles, createStyles, List, ListSubheader } from '@material-ui/core';
 import { FormField } from './FormField';
+import { SignalCellularNull } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,15 +50,23 @@ export function FormSection({content, register, errors, submission, onChange}: P
             {content.label}
           </ListSubheader>
         }>
-        {content.fields.map((field, i) => (
-          <FormField
-            key={i}
-            register={register}
-            errors={errors}
-            content={field}
-            submission={submission?.fields[i]}
-            onChange={e => handleFieldChange(e, i)} />
-        ))}
+        {content.fields.map((field, i) => {
+
+          if (typeof submission?.fields[i] === 'undefined') {
+            return null
+          }
+
+          return (
+            <FormField
+              key={i}
+              register={register}
+              errors={errors}
+              content={field}
+              submission={submission?.fields[i]}
+              onChange={e => handleFieldChange(e, i)} />
+          )
+
+        })}
       </List>
     </div>
   );

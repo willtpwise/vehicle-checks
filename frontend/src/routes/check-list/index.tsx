@@ -100,7 +100,7 @@ export function CheckList() {
         }
       })
     })
-  }, [formContent?.sections])
+  }, [formContent])
 
   const handleFormSectionChange = (payload: FormSectionSubmission, index: number) => {
 
