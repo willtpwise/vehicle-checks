@@ -1,5 +1,5 @@
 import { withAuthenticator, AmplifyAuthenticator, AmplifyGreetings, AmplifySignUp, AmplifyConfirmSignIn } from '@aws-amplify/ui-react';
-import Amplify from 'aws-amplify';
+import Amplify, { Auth } from 'aws-amplify';
 import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
@@ -13,6 +13,8 @@ import { CheckList } from './routes/check-list';
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components';
 import { makeStyles, createStyles, Theme } from '@material-ui/core';
 import logo from './logo.png'
+
+Auth.configure({ ...awsconfig, authenticationFlowType: 'USER_PASSWORD_AUTH' })
 
 Amplify.configure(awsconfig);
 
@@ -69,18 +71,6 @@ function Authenticator () {
           usernameAlias="email"
           headerText="Create your free account today"
           haveAccountText="Already a user?"
-          formFields={[
-            {
-              type: "email",
-              label: "Email",
-              required: true,
-            },
-            {
-              type: "password",
-              label: "Password",
-              required: true,
-            },
-          ]} 
         />
         <AmplifyConfirmSignIn 
           headerText="Check your email for a verification code"
@@ -99,6 +89,7 @@ export default function AppWithAuthenticator() {
 
   useEffect(() => {
     return onAuthUIStateChange((nextAuthState, authData) => {
+      console.log('--1', nextAuthState, authData)
         setAuthState(nextAuthState);
         setUser(authData)
     });
@@ -111,3 +102,5 @@ export default function AppWithAuthenticator() {
   );
 
 }
+
+// export default withAuthenticator(<App />)

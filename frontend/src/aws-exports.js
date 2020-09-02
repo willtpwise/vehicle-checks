@@ -3,12 +3,11 @@
 
 const awsmobile = {
     "aws_project_region": "us-west-2",
-    "aws_cognito_identity_pool_id": "us-west-2:0a839e96-2900-41b5-be5f-3ce483bcda34",
+    "aws_cognito_identity_pool_id": "us-west-2:e3aa7601-b1e0-4e90-8dd2-d1536ecb6b0b",
     "aws_cognito_region": "us-west-2",
-    "aws_user_pools_id": "us-west-2_MrItormCZ",
-    "aws_user_pools_web_client_id": "6kb1djdko5ckjijtjc76g1vl28",
+    "aws_user_pools_id": "us-west-2_YlslQFrl1",
+    "aws_user_pools_web_client_id": "4jfc0j71i67fjsmb7vu5914a49",
     "oauth": {},
-    "federationTarget": "COGNITO_IDENTITY_POOLS",
     "aws_cloud_logic_custom": [
         {
             "name": "vehicleChecksSubmissionsAPI",

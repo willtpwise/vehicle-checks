@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "vehiclechecks15434744_identitypool_15434744",
+    "identityPoolName": "vehiclechecks3d2e9d78_identitypool_3d2e9d78",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "vehicl15434744",
-    "userPoolName": "vehiclechecks15434744_userpool_15434744",
+    "resourceNameTruncated": "vehicl3d2e9d78",
+    "userPoolName": "vehiclechecks3d2e9d78_userpool_3d2e9d78",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -28,10 +28,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "vehicl15434744_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "vehicl3d2e9d78_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "15434744",
-    "resourceName": "vehiclechecks15434744",
+    "sharedId": "3d2e9d78",
+    "resourceName": "vehiclechecks3d2e9d78",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -45,19 +45,10 @@
             "Arn"
         ]
     },
-    "useDefault": "manual",
-    "userPoolGroupList": [],
-    "dependsOn": [],
-    "thirdPartyAuth": true,
-    "authProviders": [
-        "accounts.google.com"
+    "useDefault": "default",
+    "usernameAttributes": [
+        "email"
     ],
-    "userPoolGroups": false,
-    "adminQueries": false,
-    "triggers": "{}",
-    "hostedUI": false,
-    "parentStack": {
-        "Ref": "AWS::StackId"
-    },
-    "permissions": []
+    "userPoolGroupList": [],
+    "dependsOn": []
 }

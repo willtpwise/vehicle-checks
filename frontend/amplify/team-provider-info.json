@@ -18,13 +18,11 @@
                     "type": "cicd"
                 }
             },
-            "auth": {
-                "vehiclechecks15434744": {
-                    "googleClientId": "818232769222-cn28qc0uiuim4943ijv82vahufa50rt0.apps.googleusercontent.com"
-                }
-            },
             "function": {
                 "vehicleChecksSubmissionsHandler": {}
+            },
+            "auth": {
+                "vehiclechecks3d2e9d78": {}
             }
         }
     }

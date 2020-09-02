@@ -1,7 +1,9 @@
 const getVehicleCallSign = (submission) => {
 
+  console.log('getVehicleCallSign', JSON.stringify(submission))
+
   const callSignField = submission.sections[0].fields.find(field => {
-    field.label === 'Call Sign'
+    return field.label === 'Call Sign'
   })
 
   if (callSignField) {
